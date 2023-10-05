@@ -14,13 +14,13 @@ const {
   findUUID,
 } = require("../model/recipesModel");
 
-const recipeSchema = Joi.object({
-  title: Joi.string().required(),
-  ingredients: Joi.string().required(),
-  title_video: Joi.string().required(),
-  users_id: Joi.string().required(),
-  video: Joi.string().pattern(new RegExp("https://youtu.be/")).required(),
-});
+// const recipeSchema = Joi.object({
+//   title: Joi.string().required(),
+//   ingredients: Joi.string().required(),
+//   title_video: Joi.string().required(),
+//   users_id: Joi.string().required(),
+//   video: Joi.string().pattern(new RegExp("https://youtu.be/")).required(),
+// });
 
 // const updateSchema = Joi.object({
 //   title: Joi.string().required(),
@@ -89,10 +89,10 @@ const recipesController = {
 
   insertRecipes: async (req, res) => {
     try {
-      const { error, value } = recipeSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({ error: error.details[0].message });
-      }
+      // const { error, value } = recipeSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({ error: error.details[0].message });
+      // }
 
       const { title, ingredients, users_id, title_video, video } = req.body;
       const id = uuidv4();

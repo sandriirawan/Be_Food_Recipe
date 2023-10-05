@@ -142,6 +142,7 @@ const usersController = {
       }
       const getUserId = await selectUsers(id);
       const user = getUserId.rows[0];
+     
       const { file } = req;
       let photo = user.photo;
       if (file && file.path) {
