@@ -1,7 +1,7 @@
 const Pool = require("../config/db");
 
 // GET ALL RECIPES
-const selectAllRecipes = ({ search,limit, offset, sort, sortby }) => {
+const selectAllRecipes = ({ search, limit, offset, sort, sortby }) => {
   return Pool.query(`
   SELECT *
   FROM recipes WHERE title ILIKE '%${search}%'
@@ -11,8 +11,9 @@ const selectAllRecipes = ({ search,limit, offset, sort, sortby }) => {
 // SELECT RICAPES BY ID
 const selectRecipesById = (id) => {
   return Pool.query(`
-  SELECT *
+  SELECT recipes.*, users.name
   FROM recipes
+  LEFT JOIN users ON recipes.users_id = users.id
   WHERE recipes.id='${id}'`);
 };
 
@@ -44,7 +45,8 @@ const insertRecipes = (data) => {
 
 // UPDATE RECIPES
 const updateRecipes = (data) => {
-  const { id, title, ingredients, photo, title_video,video, video2, video3 } = data;
+  const { id, title, ingredients, photo, title_video, video, video2, video3 } =
+    data;
   return Pool.query(
     `UPDATE recipes SET title='${title}', ingredients='${ingredients}' ,photo='${photo}',title_video='${title_video}',video='${video}' ,video2='${video2}',video3='${video3}'WHERE id='${id}'`
   );

@@ -19,15 +19,8 @@ const deleteUsers = (id) => {
 
 //POST USERS
 const createUsers = (data) => {
-  const {
-    id,
-    email,
-    passwordHash,
-    confirmpasswordHash,
-    name,
-    phone,
-    photo,
-  } = data;
+  const { id, email, passwordHash, confirmpasswordHash, name, phone, photo } =
+    data;
   return Pool.query(`INSERT INTO users(id, email, password, confirmpassword, name, phone, photo) 
     VALUES ('${id}','${email}','${passwordHash}','${confirmpasswordHash}','${name}',
     '${phone}','${photo}')`);
@@ -35,15 +28,14 @@ const createUsers = (data) => {
 
 //PUT SELECT USERS
 const updateUsers = (data) => {
-  const { id,photo, name } = data;
+  const { id, photo, name } = data;
   return Pool.query(
     `UPDATE users SET photo = '${photo}', name = '${name}' WHERE id = '${id}'`
   );
 };
 
 const updatePasswordUsers = (data) => {
-  const { id, password, confirmpassword } =
-    data;
+  const { id, password, confirmpassword } = data;
   return Pool.query(
     `UPDATE users SET password = '${password}', confirmpassword = '${confirmpassword}'WHERE id = '${id}'`
   );
@@ -52,16 +44,13 @@ const updatePasswordUsers = (data) => {
 //FIND EMAIL
 const findUUID = (id) => {
   return new Promise((resolve, reject) =>
-    Pool.query(
-      `SELECT * FROM users WHERE id= '${id}' `,
-      (error, result) => {
-        if (!error) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
+    Pool.query(`SELECT * FROM users WHERE id= '${id}' `, (error, result) => {
+      if (!error) {
+        resolve(result);
+      } else {
+        reject(error);
       }
-    )
+    })
   );
 };
 
